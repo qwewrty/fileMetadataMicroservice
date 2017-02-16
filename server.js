@@ -14,8 +14,16 @@ app.get("/", function(req, res){
 } )
 
 app.post("/", upload.single('myFile'), function(req, res, next){
-    console.log(req.file);
-    //res.send(req.file)
+    
+    //Create the JSON
+    var obj = { 
+        name: req.file.originalname,
+        file_type: req.file.mimetype, 
+        size: req.file.size
+    };
+    
+    //Send the JSON as response
+    res.send(JSON.stringify(obj));
 })
 
 //Listen on a given port.
